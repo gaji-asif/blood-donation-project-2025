@@ -43,11 +43,11 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request){
         $attr = $request->validated();
-        $data = [
+        $credentials = [
             'email' => $request->email,
             'password' => $request->password
         ];
-        if(Auth::attempt($data)){
+        if(Auth::attempt($credentials)){
             $user = Auth::user();
             $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json([
